@@ -6,24 +6,26 @@ import javax.swing.JFrame;
 
  
 public class Temcho2 {
-	private static MainView mMainView;
+	private MainView mMainView;
+	private TimerController mTimerController;
 	
 	public static void main(String arg[]) {
-		initView();
 		Temcho2 temcho2 = new Temcho2();
 	}
 	
 	public Temcho2() {
 		initTimer();
+		initView(mTimerController);
+		mTimerController.setOnTickListener(mMainView);
 	}
 
 	private void initTimer() {
 		Timer timer = new Timer(true);
-		TimerController timerTask = new TimerController();
-		timer.schedule(timerTask, 0, 1000);
+		mTimerController = new TimerController(timer);
 	}
 
-	private static void initView() {
+	private void initView(OnClickListener timerCtl) {
 		mMainView = new MainView();
+		mMainView.setOnClickListener(timerCtl);
 	}
 }
