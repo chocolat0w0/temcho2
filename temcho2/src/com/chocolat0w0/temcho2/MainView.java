@@ -1,10 +1,8 @@
 package com.chocolat0w0.temcho2;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.Console;
 import java.sql.Time;
 
 import javax.swing.JButton;
