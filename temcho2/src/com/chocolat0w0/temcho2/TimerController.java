@@ -4,35 +4,41 @@ import java.sql.Time;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class TimerController extends TimerTask implements OnClickListener {
+public class TimerController implements OnClickListener {
 	Time mTime = null;
 	Timer mTimer = null;
+	Task mTask = null;
 	private OnTickListener mListener;
 	
 	TimerController(Timer timer) {
 		this.mTime = new Time(0);
-		this.mTimer = timer;
+		this.mTimer = new Timer(true);
 	}
 	
-	@Override
-	public void run() {
-		mTime.setTime(mTime.getTime() + 1000);
-		java.lang.System.out.println("time:" + mTime.getTime());
-		mListener.onTick(mTime);
-	}
-
 	void setOnTickListener(OnTickListener listener) {
 		this.mListener = listener;
 	}
 
 	@Override
 	public void onClickStart() {
-		mTimer.schedule(this, 0, 1000);
+		mTask = new Task();
+		mTimer.schedule(mTask, 0, 1000);
 	}
 
 	@Override
 	public void onClickStop() {
-		mTimer.cancel();
+		mTask.cancel();
 	}
+	
+	class Task extends TimerTask {
 
+		@Override
+		public void run() {
+			mTime.setTime(mTime.getTime() + 1000);
+			java.lang.System.out.println("time:" + mTime.getTime());
+			mListener.onTick(mTime);
+		}
+		
+	}
+	
 }
