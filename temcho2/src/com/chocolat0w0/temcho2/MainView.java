@@ -12,8 +12,12 @@ import javax.swing.JPanel;
 
 
 public class MainView implements OnTickListener {
+	private static final String START = "start";
+	private static final String STOP = "stop";
+
 	private OnClickListener mListener;
 	private JLabel mLabelTimer;
+	private JButton mStartBtn;
 
 	public MainView() {
 		JFrame frame = new JFrame("タイトル");
@@ -24,8 +28,8 @@ public class MainView implements OnTickListener {
 		
 		mLabelTimer = new JLabel("00:00");
 		panel.add(mLabelTimer);
-		JButton startBtn = new JButton("start");
-		startBtn.addMouseListener(new MouseListener() {
+		mStartBtn = new JButton(START);
+		mStartBtn.addMouseListener(new MouseListener() {
 			
 			@Override
 			public void mouseReleased(MouseEvent arg0) {
@@ -53,10 +57,15 @@ public class MainView implements OnTickListener {
 			
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				mListener.onClick();
+				if (mStartBtn.getText() == START) {
+					mListener.onClickStart();
+				} else {
+					mListener.onClickStop();
+				}
+				toggleBtn();
 			}
 		});
-		panel.add(startBtn);
+		panel.add(mStartBtn);
 		
 		panel.setVisible(true);
 		frame.getContentPane().add(panel, BorderLayout.CENTER);
@@ -64,6 +73,10 @@ public class MainView implements OnTickListener {
 		frame.setVisible(true);
 	}
 	
+	protected void toggleBtn() {
+		mStartBtn.setText(mStartBtn.getText() == START ? STOP : START);  
+	}
+
 	void setOnClickListener(OnClickListener listener) {
 		this.mListener = listener;
 	}

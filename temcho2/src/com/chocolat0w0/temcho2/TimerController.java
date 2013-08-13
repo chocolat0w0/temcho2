@@ -21,13 +21,18 @@ public class TimerController extends TimerTask implements OnClickListener {
 		mListener.onTick(mTime);
 	}
 
-	@Override
-	public void onClick() {
-		mTimer.schedule(this, 0, 1000);
-	}
-	
 	void setOnTickListener(OnTickListener listener) {
 		this.mListener = listener;
+	}
+
+	@Override
+	public void onClickStart() {
+		mTimer.schedule(this, 0, 1000);
+	}
+
+	@Override
+	public void onClickStop() {
+		mTimer.cancel();
 	}
 
 }
