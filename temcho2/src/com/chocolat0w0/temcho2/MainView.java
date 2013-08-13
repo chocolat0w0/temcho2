@@ -1,6 +1,8 @@
 package com.chocolat0w0.temcho2;
 
 import java.awt.BorderLayout;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.sql.Time;
@@ -57,12 +59,28 @@ public class MainView implements OnTickListener {
 			
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				if (mStartBtn.getText() == START) {
-					mListener.onClickStart();
-				} else {
-					mListener.onClickStop();
+				onClickBtn();
+			}
+		});
+		
+		mStartBtn.addKeyListener(new KeyListener() {
+			
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO 自動生成されたメソッド・スタブ
+			}
+			
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					onClickBtn();
 				}
-				toggleBtn();
+			}
+			
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				// TODO 自動生成されたメソッド・スタブ
+				
 			}
 		});
 		panel.add(mStartBtn);
@@ -73,7 +91,16 @@ public class MainView implements OnTickListener {
 		frame.setVisible(true);
 	}
 	
-	protected void toggleBtn() {
+	private void onClickBtn() {
+		if (mStartBtn.getText() == START) {
+			mListener.onClickStart();
+		} else {
+			mListener.onClickStop();
+		}
+		toggleBtn();
+	}
+	
+	private void toggleBtn() {
 		mStartBtn.setText(mStartBtn.getText() == START ? STOP : START);  
 	}
 
