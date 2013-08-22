@@ -2,7 +2,6 @@ package com.chocolat0w0.temcho2;
 
 import java.util.Timer;
 
- 
 public class Temcho2 {
 	
 	public static void main(String arg[]) {
