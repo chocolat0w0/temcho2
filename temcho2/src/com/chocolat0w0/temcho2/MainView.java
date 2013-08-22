@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 
 
 public class MainView implements OnTickListener {
@@ -20,6 +21,7 @@ public class MainView implements OnTickListener {
 	private OnClickListener mListener;
 	private JLabel mLabelTimer;
 	private JButton mStartBtn;
+	private JTextArea mTaskText;
 
 	public MainView() {
 		JFrame frame = new JFrame("タイトル");
@@ -27,6 +29,8 @@ public class MainView implements OnTickListener {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JPanel panel = new JPanel();
+		mTaskText = new JTextArea("task");
+		panel.add(mTaskText);
 		
 		mLabelTimer = new JLabel("00:00");
 		panel.add(mLabelTimer);
