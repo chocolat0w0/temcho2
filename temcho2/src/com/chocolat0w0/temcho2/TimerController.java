@@ -7,10 +7,10 @@ import java.util.TimerTask;
 public class TimerController implements OnClickListener {
 	Time mTime = null;
 	Timer mTimer = null;
-	Task mTask = null;
+	MyTimerTask mTask = null;
 	private OnTickListener mListener;
 	
-	TimerController(Timer timer) {
+	TimerController() {
 		this.mTime = new Time(0);
 		this.mTimer = new Timer(true);
 	}
@@ -21,7 +21,7 @@ public class TimerController implements OnClickListener {
 
 	@Override
 	public void onClickStart() {
-		mTask = new Task();
+		mTask = new MyTimerTask();
 		mTimer.schedule(mTask, 0, 1000);
 	}
 
@@ -30,7 +30,7 @@ public class TimerController implements OnClickListener {
 		mTask.cancel();
 	}
 	
-	class Task extends TimerTask {
+	class MyTimerTask extends TimerTask {
 
 		@Override
 		public void run() {

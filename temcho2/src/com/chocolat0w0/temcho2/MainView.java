@@ -11,7 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 
 public class MainView implements OnTickListener {
@@ -19,9 +19,9 @@ public class MainView implements OnTickListener {
 	private static final String STOP = "stop";
 
 	private OnClickListener mListener;
-	private JLabel mLabelTimer;
+	private JLabel mTimerLabel;
 	private JButton mStartBtn;
-	private JTextArea mTaskText;
+	private JTextField mTaskText;
 
 	public MainView() {
 		JFrame frame = new JFrame("タイトル");
@@ -29,11 +29,11 @@ public class MainView implements OnTickListener {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JPanel panel = new JPanel();
-		mTaskText = new JTextArea("task");
+		mTaskText = new JTextField("task", 10);
 		panel.add(mTaskText);
 		
-		mLabelTimer = new JLabel("00:00");
-		panel.add(mLabelTimer);
+		mTimerLabel = new JLabel("00:00");
+		panel.add(mTimerLabel);
 		mStartBtn = new JButton(START);
 		mStartBtn.addMouseListener(new MouseListener() {
 			
@@ -114,7 +114,7 @@ public class MainView implements OnTickListener {
 
 	@Override
 	public void onTick(Time time) {
-		mLabelTimer.setText(formatTime(time));
+		mTimerLabel.setText(formatTime(time));
 	}
 	
 	private String formatTime(Time time) {
